@@ -1,41 +1,27 @@
-Please add me as a Agent Developer [Published] on Discord, my username is eliotkolin#4918.
-# Compound Agent
+# High Gas Agent
 
 ## Description
 
-This agent monitors the Compound protocol and alerts when:
-
-- the `drip()` method is called on the Reservoir contract, or
-- an unusual distribution of COMP tokens occurs when calling `claimComp()` on the Comptroller contract
+This agent detects transactions with high gas consumption
 
 ## Supported Chains
 
 - Ethereum
+- List any other chains this agent can support e.g. BSC
 
 ## Alerts
 
-- COMP-1
+Describe each of the type of alerts fired by this agent
 
-  - Fired when a COMP distribution occurs that is at least twice as much as accrued
-  - Severity is always set to "High"
-  - Type is always set to "Suspicious"
-  - Metadata fields included:
-    - `receiver` - the address that received the COMP tokens
-    - `compDistributed` - the amount of COMP distributed to receiver
-    - `compAccrued` - the amount of COMP accrued by receiver in the previous block
-
-- COMP-2
-  - Fired when the `drip()` method is called on the Reservoir contract
-  - Severity is always set to "Medium"
-  - Type is always set to "Suspicious"
-  - Metadata fields included:
-    - `from` - the address that invoked the method
-    - `dripAmount` - the amount of COMP dripped from Reservoir
+- FORTA-1
+  - Fired when a transaction consumes more gas than 1,000,000 gas
+  - Severity is always set to "medium" (mention any conditions where it could be something else)
+  - Type is always set to "suspicious" (mention any conditions where it could be something else)
+  - Mention any other type of metadata fields included with this alert
 
 ## Test Data
 
 The agent behaviour can be verified with the following transactions:
 
-- 0xf4bfef1655f2092cf062c008153a5be66069b2b1fedcacbf4037c1f3cc8a9f45 (fires COMP-1 alert)
-- 0xbc246c878326f2c128462d08a0b74048b1dbee733adde8863f569c949c06422a (fires COMP-1 alert)
-- 0x02ba168f4d4fc313d095e9f0711447e8b96b26421539bd40be58243cd80a73cd (fires COMP-2 alert)
+- 0x1b71dcc24657989f920d627c7768f545d70fcb861c9a05824f7f5d056968aeee (1,094,700 gas)
+- 0x8df0579bf65e859f87c45b485b8f1879c56bc818043c3a0d6870c410b5013266 (2,348,226 gas)
